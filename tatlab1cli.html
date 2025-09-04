@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Tattoo Lab — Color (Stencil Removed)</title>
 <link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
     --bg:#0f1115; --text:#e6e8ec; --muted:#b6bac4;
@@ -118,17 +119,17 @@
 
     <!-- UNIVERSAL TOOLS: always visible -->
     <div class="top-tools" id="topTools">
-      <button class="tool-btn small" data-tool="import">📥 Import</button>
-      <button class="tool-btn small" data-tool="details">📝 Details</button>
-      <button class="tool-btn small" data-tool="brightness">☀️ Bright</button>
-      <button class="tool-btn small" data-tool="saturation">🎚️ Sat</button>
-      <button class="tool-btn small" data-tool="palette">🎨 Palette</button>
-      <button class="tool-btn small" data-tool="brand">🏷️ Brand</button>
-      <button class="tool-btn small" data-tool="recipes">🧪 Recipes</button>
+      <button class="tool-btn small" data-tool="import"><i class="fa-solid fa-download"></i> Import</button>
+      <button class="tool-btn small" data-tool="details"><i class="fa-solid fa-file-lines"></i> Details</button>
+      <button class="tool-btn small" data-tool="brightness"><i class="fa-solid fa-sun"></i> Bright</button>
+      <button class="tool-btn small" data-tool="saturation"><i class="fa-solid fa-sliders"></i> Sat</button>
+      <button class="tool-btn small" data-tool="palette"><i class="fa-solid fa-palette"></i> Palette</button>
+      <button class="tool-btn small" data-tool="brand"><i class="fa-solid fa-tags"></i> Brand</button>
+      <button class="tool-btn small" data-tool="recipes"><i class="fa-solid fa-flask"></i> Recipes</button>
       
-      <button class="tool-btn small" data-tool="grid">#️⃣ Grid</button>
-      <button class="tool-btn small" data-tool="library">📚 Library</button>
-      <button class="tool-btn small" data-tool="export">⬇️ Export</button>
+      <button class="tool-btn small" data-tool="grid"><i class="fa-solid fa-grip"></i> Grid</button>
+      <button class="tool-btn small" data-tool="library"><i class="fa-solid fa-book"></i> Library</button>
+      <button class="tool-btn small" data-tool="export"><i class="fa-solid fa-upload"></i> Export</button>
     </div>
 
     <div class="chip">Mode: <span id="modeLabel">Color</span></div>
@@ -157,7 +158,7 @@ function rgbToLab(r,g,b){const xyz=rgbToXyz(r,g,b);return xyzToLab(xyz[0],xyz[1]
 function deltaE2000(L1a1b1, L2a2b2){const [L1,a1,b1]=L1a1b1,[L2,a2,b2]=L2a2b2;const avgLp=(L1+L2)/2;const C1=Math.hypot(a1,b1),C2=Math.hypot(a2,b2);const avgC=(C1+C2)/2;const G=0.5*(1-Math.sqrt(Math.pow(avgC,7)/(Math.pow(avgC,7)+Math.pow(25,7))));const a1p=(1+G)*a1,a2p=(1+G)*a2;const C1p=Math.hypot(a1p,b1),C2p=Math.hypot(a2p,b2);const avgCp=(C1p+C2p)/2;const h1p=hp(a1p,b1),h2p=hp(a2p,b2);const deltahp=dh(h1p,h2p,C1p,C2p);const deltaLp=L2-L1;const deltaCp=C2p-C1p;const deltaHp=2*Math.sqrt(C1p*C2p)*Math.sin(toRad(deltahp/2));const avgHp=ahp(h1p,h2p,C1p,C2p);const T=1-0.17*Math.cos(toRad(avgHp-30))+0.24*Math.cos(toRad(2*avgHp))+0.32*Math.cos(toRad(3*avgHp+6))-0.20*Math.cos(toRad(4*avgHp-63));const Sl=1+(0.015*Math.pow(avgLp-50,2))/Math.sqrt(20+Math.pow(avgLp-50,2));const Sc=1+0.045*avgCp;const Sh=1+0.015*avgCp*T;const Rt=-2*Math.sqrt(Math.pow(avgCp,7)/(Math.pow(avgCp,7)+Math.pow(25,7)))*Math.sin(toRad(60*Math.exp(-Math.pow((avgHp-275)/25,2))));const Kl=1,Kc=1,Kh=1;return Math.sqrt(Math.pow(deltaLp/(Sl*Kl),2)+Math.pow(deltaCp/(Sc*Kc),2)+Math.pow(deltaHp/(Sh*Kh),2)+Rt*(deltaCp/(Sc*Kc))*(deltaHp/(Sh*Kh)));function toRad(d){return d*Math.PI/180}function hp(a,b){if(a===0&&b===0)return 0;const h=Math.atan2(b,a)*180/Math.PI;return h>=0?h:h+360}function dh(h1,h2,C1p,C2p){if(C1p*C2p===0)return 0;const d=h2-h1;if(Math.abs(d)<=180)return d;return d>180?d-360:d+360}function ahp(h1,h2,C1p,C2p){if(C1p*C2p===0)return h1+h2;const d=Math.abs(h1-h2);if(d<=180)return (h1+h2)/2;return (h1+h2+360)/2%360}}
 
 function makePanel({id,title,content,x=24,y=72,width=320,onopen}){
-  const existing=$('#'+id); if(existing){ existing.remove(); return null; }
+  const existing=$('#'+id); if(existing){ existing.remove(); }
   const p=document.createElement('div'); p.id=id; p.className='panel metal'; p.style.left=x+'px'; p.style.top=y+'px'; p.style.zIndex=(++z); p.style.width=width+'px';
   const h=document.createElement('div'); h.className='panel-header'; h.innerHTML=`<span>${title}</span><div style="display:flex;gap:6px"><button class='icon-btn' data-act='collapse'>▭</button><button class='icon-btn' data-act='close'>&times;</button></div>`;
   const inner=document.createElement('div'); inner.className='panel-inner'; inner.innerHTML=content;
@@ -2689,7 +2690,7 @@ const builders={
       const [brand,color]=sw.getAttribute('data-palette-item').split(':');
       appState.palette = appState.palette.filter(p=>!(p.brand===brand && p.color===color));
       saveAppState(); renderPal();
-      if($('#p-recipes')){ builders.recipes(); builders.recipes(); } // refresh
+      if($('#p-recipes')){ builders.recipes(); } // refresh
     });
   }}),
 
