@@ -198,6 +198,30 @@
     .chip {font-size: 11px;}
     .panel {top: 100px !important;}
   }
+
+  /* Style for the new dropdown menu */
+  .mode-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .mode-select {
+    border-radius: 999px;
+    padding: 5px 10px;
+    color: var(--muted);
+    background: #1c2330;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  .mode-select:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+  }
 </style>
 </head>
 <body>
@@ -227,7 +251,15 @@
       <button class="tool-btn small" data-tool="export"><i class="fa-solid fa-upload"></i> Export</button>
     </div>
 
-    <div class="chip">Mode: <span id="modeLabel">Color</span></div>
+    <!-- New dropdown menu for modes -->
+    <div class="mode-dropdown chip">
+        <select id="mode-selector" class="mode-select">
+            <option value="color">Mode: Color</option>
+            <option value="stencil">Mode: Stencil</option>
+            <option value="bookings">Mode: Bookings</option>
+            <option value="price-calculator">Mode: Price Calculator</option>
+        </select>
+    </div>
   </div>
 
   <div class="workspace">
@@ -817,11 +849,40 @@ document.addEventListener('click', (e)=>{
 });
 document.documentElement.style.setProperty('--grid-size', appState.gridSize+'px');
 
+// New JavaScript for mode selection
+const modeSelector = $('#mode-selector');
+const topTools = $('#topTools');
+
+const modes = {
+    'color': ['import', 'details', 'brightness', 'saturation', 'palette', 'brand', 'recipes', 'grid', 'library', 'export'],
+    'stencil': ['import', 'details', 'brightness', 'saturation', 'export'], // Example modes, update as needed
+    'bookings': ['details'], // Example modes, update as needed
+    'price-calculator': [] // Example modes, update as needed
+};
+
+function updateTopTools(mode) {
+    // Hide all tools
+    $$('.tool-btn', topTools).forEach(btn => btn.style.display = 'none');
+    // Show only tools for the selected mode
+    modes[mode].forEach(toolId => {
+        const toolBtn = $(`[data-tool='${toolId}']`, topTools);
+        if (toolBtn) {
+            toolBtn.style.display = 'inline-block';
+        }
+    });
+}
+
+modeSelector.addEventListener('change', (e) => {
+    const selectedMode = e.target.value;
+    updateTopTools(selectedMode);
+    // You can add more logic here for each mode, like changing canvas content or panels
+    // Example: if (selectedMode === 'stencil') { showStencilUI(); }
+});
+
 /* Boot */
+updateTopTools(modeSelector.value); // Set initial state based on default value
 render();
 
 </script>
 </body>
 </html>
-
-
