@@ -5,32 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Tattoo Lab — Color</title>
 <link rel="manifest" href="manifest.json">
+<!-- ICONS & FONT -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+  /* UI REFRESH: Updated color palette, fonts, and component styles for a more modern look. */
   :root{
-    --bg:#0f1115; --text:#e6e8ec; --muted:#b6bac4;
-    --panel: linear-gradient(180deg,#1a1f29 0%, #0f141b 100%);
-    --shadow: 0 8px 18px rgba(0,0,0,.45);
-    --radius:14px;
-    --font: ui-sans-serif,-apple-system,system-ui,Segoe UI,Inter,Roboto,Arial;
+    --bg: #0a0c10;
+    --text: #e6e8ec; 
+    --muted: #a0a7b4;
+    --panel-gradient: linear-gradient(145deg, #2a2f3b, #15181e);
+    --shadow-deep: 0 12px 28px rgba(0,0,0,.6), 0 5px 12px rgba(0,0,0,.4);
+    --radius: 12px;
+    --font: 'Inter', ui-sans-serif, -apple-system, system-ui, Segoe UI, Roboto, Arial;
     --grid-size: 40px; /* adjustable */
     --grid-color: rgba(255,255,255,.10);
+    --primary-orange: #F97316;
+    --primary-orange-hover: #EA580C;
+    --primary-red: #DC2626;
+    --primary-red-hover: #B91C1C;
+    --border-color: rgba(255, 255, 255, .15);
+    --border-color-light: rgba(255, 255, 255, .25);
   }
-  body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px}
-  .metal{background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+  body{margin:0;height:100vh;background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px; overflow: hidden;}
+  .metal{background:var(--panel-gradient);border-radius:var(--radius);box-shadow:var(--shadow-deep);border:1px solid var(--border-color)}
 
   /* Top bar */
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;gap:10px;background:linear-gradient(180deg,#161a22,#0e1218);height:56px}
-  .brand{display:flex;gap:10px;align-items:center}
-  .logo{width:32px;height:32px;border-radius:8px;}
-  .chip{border-radius:999px;padding:4px 8px;color:var(--muted);background:#1c2330;font-size:12px;border:1px solid rgba(255,255,255,.08)}
-  .top-tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:70vw}
-  .tool-btn{border:1px solid rgba(255,255,255,.1);background:#243044;color:var(--text);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:12px;white-space:nowrap; transition: background 0.2s ease;}
-  .tool-btn:hover{background:#30405c;}
-  .tool-btn.small{padding:3px 8px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;gap:12px;background:linear-gradient(180deg,#1A1E28,#111318);height:60px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:36px;height:36px;}
+  .chip{border-radius:999px;padding:5px 10px;color:var(--muted);background:#1c2330;font-size:12px;border:1px solid var(--border-color); white-space: nowrap;}
+  .top-tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:70vw}
+  .tool-btn{
+    background: linear-gradient(145deg, #3a4150, #1f232b);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.15s ease-out;
+    border: 1px solid rgba(0,0,0,.5);
+    border-top-color: var(--border-color-light);
+    text-shadow: 0 1px 1px rgba(0,0,0,.5);
+    box-shadow: 0 2px 2px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  .tool-btn:hover{
+    background: linear-gradient(145deg, #484f61, #2a2f3a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .tool-btn:active{
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px rgba(0,0,0,.4), inset 0 1px 2px rgba(0,0,0,.5);
+    background: linear-gradient(145deg, #1f232b, #3a4150);
+  }
+  .tool-btn.small{padding:5px 10px; font-size: 12px;}
+  .tool-btn i { margin-right: 6px; }
 
-  .workspace{position:relative;height:calc(100% - 56px); display:flex; justify-content:center; align-items:center; padding: 10px;}
-  #canvas-container{position:relative;border-radius:14px;background:#0b0d11;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06);overflow:hidden; width: 100%; max-width: 1600px; height: 100%; max-height: 900px;}
+  .workspace{position:relative;height:calc(100% - 60px); display:flex; justify-content:center; align-items:center; padding: 12px;}
+  #canvas-container{position:relative;border-radius:var(--radius);background:#0b0d11;box-shadow:var(--shadow-deep);border:1px solid var(--border-color);overflow:hidden; width: 100%; max-width: 1600px; height: 100%; max-height: 900px;}
   #mainCanvas{width:100%;height:100%;display:block;background:#0b0d11;cursor:default}
   
   /* Grid overlay */
@@ -39,65 +76,127 @@
     pointer-events:none; 
     display:none;
     background-image:
-      linear-gradient(0deg, red 1px, transparent 1px),
-      linear-gradient(90deg, red 1px, transparent 1px);
+      linear-gradient(0deg, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
   }
 
   /* Panels */
   #panel-layer{position:absolute; inset:0; pointer-events:none}
   .panel{position:absolute;min-width:240px;max-width:360px;pointer-events:auto;user-select:none;z-index:20;}
-  .panel-header{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:#202735;color:#c9d6ff;font-size:11px;text-transform:uppercase;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius); cursor:grab;}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#202735;color:#c9d6ff;font-size:11px;font-weight: 600; text-transform:uppercase;letter-spacing: 0.5px; border-top-left-radius:var(--radius);border-top-right-radius:var(--radius); cursor:grab;}
   .panel-header:active {cursor:grabbing;}
-  .panel-inner{padding:10px;display:flex;flex-direction:column;gap:10px}
-  .icon-btn{border:none;background:#243044;color:var(--text);border-radius:8px;padding:4px 8px;cursor:pointer; transition: background 0.2s ease;}
+  .panel-inner{padding:12px;display:flex;flex-direction:column;gap:12px}
+  .icon-btn{border:none;background:#243044;color:var(--text);border-radius:8px;width:24px; height: 24px; cursor:pointer; transition: background 0.2s ease; display:grid; place-items:center; font-size: 14px;}
   .icon-btn:hover{background:#30405c;}
   .row{display:flex;align-items:center;gap:10px}
-  .label{font-size:12px;color:var(--muted)}
-  .btn{min-height:38px;padding:6px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#2a3750;color:var(--text);font-weight:600;cursor:pointer; transition: background 0.2s ease;}
-  .btn:hover{background:#384a6b;}
-  .btn.primary{background:#dd4b25;}
-  .btn.primary:hover{background:#c74422;}
-  .select,select,input[type='text'],input[type='number'], textarea{width:100%;min-height:38px;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#22293a;color:var(--text); appearance: none; -webkit-appearance: none;}
-  textarea { min-height: 80px; }
-  .slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;background:#2b3446;border-radius:999px;border:1px solid rgba(255,255,255,.1)}
-  .slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#f97316;border:1px solid rgba(255,255,255,.4); cursor:grab;}
-  .slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#f97316;border:1px solid rgba(255,255,255,.4); cursor:grab;}
+  .label{font-size:13px;color:var(--muted)}
+  .btn{
+    min-height:38px;
+    padding:6px 12px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    transition: all 0.15s ease-out;
+    background: linear-gradient(145deg, #3a4150, #1f232b);
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,.5);
+    border-top-color: var(--border-color-light);
+    text-shadow: 0 1px 1px rgba(0,0,0,.5);
+    box-shadow: 0 3px 4px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  .btn:hover{
+    background: linear-gradient(145deg, #484f61, #2a2f3a);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 8px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+   .btn:active{
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,.4), inset 0 1px 3px rgba(0,0,0,.5);
+    background: linear-gradient(145deg, #1f232b, #3a4150);
+  }
+  .btn.primary{
+    background: linear-gradient(145deg, var(--primary-orange), #c05a12);
+    border: 1px solid #7c2d12;
+    border-top-color: #fdba74;
+    text-shadow: 0 -1px 1px rgba(0,0,0,.4);
+  }
+  .btn.primary:hover{
+    background: linear-gradient(145deg, #fb923c, var(--primary-orange-hover));
+  }
+  .select,select,input[type='text'],input[type='number'], textarea{
+    width:100%;
+    min-height:38px;
+    padding:8px 12px;
+    border-radius:10px;
+    background: #111318;
+    color:var(--text);
+    appearance: none; -webkit-appearance: none;
+    transition: all .2s ease;
+    border: 1px solid rgba(0,0,0,.6);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.5);
+  }
+  .select:focus, select:focus, input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.5), 0 0 0 3px rgba(249, 115, 22, .3);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  .slider{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:8px;
+    background:#111318;
+    border-radius:999px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+  }
+  .slider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:22px;height:22px;border-radius:50%;
+    background: linear-gradient(145deg, var(--primary-orange), #c05a12);
+    border:2px solid #fff;
+    cursor:grab;
+    box-shadow: 0 2px 4px rgba(0,0,0,.5);
+  }
+  .slider::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;
+    background: linear-gradient(145deg, var(--primary-orange), #c05a12);
+    border:2px solid #fff;
+    cursor:grab;
+    box-shadow: 0 2px 4px rgba(0,0,0,.5);
+  }
 
   .swatches{display:grid;grid-template-columns:repeat(auto-fill, minmax(100px, 1fr));gap:8px}
-  .swatch{display:flex;align-items:center;gap:8px;padding:8px;background:#1b2231;border:1px solid rgba(255,255,255,.08);border-radius:10px; cursor:pointer; transition: background 0.2s ease;}
-  .swatch:hover{background:#2a3750;}
-  .dot{width:18px;height:18px;border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(0,0,0,.6); flex-shrink: 0;}
-  .swatch .name{
-    font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-grow: 1; min-width: 0;
-  }
-  .swatch .remove-btn { margin-left:auto; flex-shrink:0; background:none; border:none; color:var(--muted); font-size:16px; cursor:pointer; padding:0 4px; line-height:1; }
-  .swatch .remove-btn:hover {color: var(--text);}
+  .swatch{display:flex;align-items:center;gap:8px;padding:8px;background:#1b2231;border:1px solid rgba(255,255,255,.08);border-radius:10px; cursor:pointer; transition: all 0.2s ease;}
+  .swatch:hover{background:#2a3750; transform: scale(1.03); border-color: var(--primary-orange);}
+  .dot{width:20px;height:20px;border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(0,0,0,.6); flex-shrink: 0;}
+  .swatch .name{font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-grow: 1; min-width: 0;}
+  .swatch .remove-btn { margin-left:auto; flex-shrink:0; background:none; border:none; color:var(--muted); font-size:16px; cursor:pointer; padding:0 4px; line-height:1; transition: color .2s ease; }
+  .swatch .remove-btn:hover {color: #ef4444;}
   .color-library-grid { grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); }
   .color-library-grid .swatch { padding:4px; justify-content:center; }
 
 
   /* Loading indicator for extract */
-  .loading-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; color:#fff; font-size:24px; border-radius:var(--radius); pointer-events:all; z-index:100; }
+  .loading-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; color:#fff; font-size:24px; border-radius:var(--radius); pointer-events:all; z-index:100; backdrop-filter: blur(4px); }
 
   /* Responsive */
   @media (max-width:1100px){ .top-tools{max-width:65vw} }
   @media (max-width:768px){
-    .topbar {flex-wrap: wrap; height: auto; justify-content: center;}
-    .top-tools {max-width: 100%; order: 3; justify-content: center;}
+    .topbar {flex-wrap: wrap; height: auto; justify-content: center; padding: 10px;}
+    .top-tools {max-width: 100%; order: 3; justify-content: center; margin-top: 10px;}
     .brand {width: 100%; justify-content: center;}
-    .chip {order: 2; margin-top: 5px;}
-    .workspace {padding: 5px; height: calc(100% - 56px - 30px);}
+    .chip {order: 2;}
+    .workspace {padding: 8px; height: calc(100% - 100px);}
     #canvas-container {margin: 0;}
-    .panel {min-width: unset; max-width: 95vw; left: 2.5vw !important; top: 70px !important;}
+    .panel {min-width: unset; max-width: 95vw; left: 2.5vw !important; top: 110px !important;}
     .swatches {grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));}
   }
   @media (max-width:480px){
-    .topbar {padding: 6px 5px;}
+    .topbar {padding: 8px 5px;}
     .top-tools {gap: 4px;}
-    .tool-btn, .tool-btn.small {font-size: 11px; padding: 3px 6px;}
+    .tool-btn, .tool-btn.small {font-size: 11px; padding: 4px 8px;}
     .chip {font-size: 11px;}
-    .panel {top: 60px !important;}
+    .panel {top: 100px !important;}
   }
 </style>
 </head>
@@ -105,9 +204,10 @@
 <div id="app" data-mode="color">
   <div class="topbar metal">
     <div class="brand">
-      <div class="logo">TL</div>
+      <!-- UI REFRESH: Replaced SVG with a custom image tag for your logo. -->
+      <img class="logo" src="icon-192.png" alt="Tattoo Lab Logo">
       <div>
-        <div style="font-weight:700">Tattoo Lab</div>
+        <div style="font-weight:700">Tattoo Lab PRO </div>
         <div style="font-size:11px;color:var(--muted)">Version 1.0</div>
       </div>
     </div>
@@ -135,7 +235,7 @@
       <canvas id="mainCanvas" width="1600" height="900"></canvas>
       <div id="gridOverlay"></div>
       <div id="panel-layer">
-        <div id="draggable-loupe"><canvas id="draggable-loupe-canvas" width="100" height="100"></canvas></div>
+        <!-- Panels will be dynamically inserted here -->
       </div>
     </div>
   </div>
@@ -144,7 +244,7 @@
 <script>
 /* ===== Helpers ===== */
 const $=(s,c=document)=>c.querySelector(s); const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
-const layer=$('#panel-layer'); let z=20;
+const layer=$('#panel-layer'); var panelZIndex=20;
 const canvas=$('#mainCanvas'); const ctx=canvas.getContext('2d');
 
 function rgbToXyz(r,g,b){r/=255;g/=255;b/=255; r=r<=0.04045?r/12.92:Math.pow((r+0.055)/1.055,2.4); g=g<=0.04045?g/12.92:Math.pow((g+0.055)/1.055,2.4); b=b<=0.04045?b/12.92:Math.pow((b+0.055)/1.055,2.4); return [r*0.4124+g*0.3576+b*0.1805, r*0.2126+g*0.7152+b*0.0722, r*0.0193+g*0.1192+b*0.9505]; }
@@ -154,12 +254,14 @@ function deltaE2000(L1a1b1, L2a2b2){const [L1,a1,b1]=L1a1b1,[L2,a2,b2]=L2a2b2;co
 
 function makePanel({id,title,content,x=24,y=72,width=320,onopen}){
   const existing=$('#'+id); if(existing){ existing.remove(); }
-  const p=document.createElement('div'); p.id=id; p.className='panel metal'; p.style.left=x+'px'; p.style.top=y+'px'; p.style.zIndex=(++z); p.style.width=width+'px';
-  const h=document.createElement('div'); h.className='panel-header'; h.innerHTML=`<span>${title}</span><div style="display:flex;gap:6px"><button class='icon-btn' data-act='collapse'>▭</button><button class='icon-btn' data-act='close'>&times;</button></div>`;
+  const p=document.createElement('div'); p.id=id; p.className='panel metal'; p.style.left=x+'px'; p.style.top=y+'px'; p.style.zIndex=(++panelZIndex); p.style.width=width+'px';
+  const h=document.createElement('div'); h.className='panel-header'; 
+  // UI REFRESH: Replaced text buttons with Font Awesome icons for a cleaner header.
+  h.innerHTML=`<span>${title}</span><div style="display:flex;gap:6px"><button class='icon-btn' data-act='collapse'><i class="fa-regular fa-window-minimize" style="pointer-events:none;"></i></button><button class='icon-btn' data-act='close'><i class="fa-solid fa-xmark" style="pointer-events:none;"></i></button></div>`;
   const inner=document.createElement('div'); inner.className='panel-inner'; inner.innerHTML=content;
   p.append(h,inner); layer.append(p);
   let drag=false,ox=0,oy=0; const bounds=()=>$('#canvas-container').getBoundingClientRect();
-  h.addEventListener('pointerdown',e=>{ if(e.target.closest('[data-act]')) return; drag=true; p.style.zIndex=(++z); const r=p.getBoundingClientRect(); ox=e.clientX-r.left; oy=e.clientY-r.top; h.setPointerCapture(e.pointerId)});
+  h.addEventListener('pointerdown',e=>{ if(e.target.closest('[data-act]')) return; drag=true; p.style.zIndex=(++panelZIndex); const r=p.getBoundingClientRect(); ox=e.clientX-r.left; oy=e.clientY-r.top; h.setPointerCapture(e.pointerId)});
   h.addEventListener('pointermove',e=>{ if(!drag) return; const b=bounds(); let nx=e.clientX-ox-b.left, ny=e.clientY-oy-b.top; nx=Math.max(6,Math.min(nx,b.width-p.offsetWidth-6)); ny=Math.max(6,Math.min(ny,b.height-p.offsetHeight-6)); p.style.left=nx+'px'; p.style.top=ny+'px';});
   h.addEventListener('pointerup',()=>{ if(!drag) return; drag=false; const b=bounds(); const r=p.getBoundingClientRect(); const L=r.left-b.left,R=b.right-r.right,T=r.top-b.top,B=b.bottom-r.bottom; const m=Math.min(L,R,T,B),g=8; if(m===L) p.style.left=g+'px'; if(m===R) p.style.left=(b.width-p.offsetWidth-g)+'px'; if(m===T) p.style.top=g+'px'; if(m===B) p.style.top=(b.height-p.offsetHeight-g)+'px';});
   h.addEventListener('click',e=>{ const act=e.target.closest('[data-act]')?.dataset.act; if(act==='close') p.remove(); if(act==='collapse') inner.style.display=(inner.style.display==='none')?'flex':'none'; });
@@ -171,8 +273,8 @@ function alertUser(message){
   const existingModal = $('#custom-alert-modal'); if (existingModal) existingModal.remove();
   const modal = document.createElement('div');
   modal.id = 'custom-alert-modal';
-  modal.style = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--panel); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 15px; align-items: center; max-width: 300px; text-align: center;`;
-  modal.innerHTML = `<div style="font-size: 16px; color: var(--text);">${message}</div><button class="btn primary" id="alert-ok-btn" style="width: 80px;">OK</button>`;
+  modal.style = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--panel-gradient); border-radius: var(--radius); box-shadow: var(--shadow-deep); padding: 25px; z-index: 1000; display: flex; flex-direction: column; gap: 20px; align-items: center; max-width: 320px; text-align: center; border: 1px solid var(--border-color);`;
+  modal.innerHTML = `<div style="font-size: 16px; color: var(--text); line-height: 1.5;">${message}</div><button class="btn primary" id="alert-ok-btn" style="width: 100px; padding: 8px 0;">OK</button>`;
   document.body.appendChild(modal);
   $('#alert-ok-btn', modal).onclick = () => modal.remove();
 }
@@ -202,7 +304,7 @@ function saveAppState(){
 
 /* ===== Image loading / rendering (no stencil branch) ===== */
 const off=document.createElement('canvas'); const ofx=off.getContext('2d');
-(function(){ const w=canvas.width,h=canvas.height; ctx.fillStyle='#0b0d11';ctx.fillRect(0,0,w,h); ctx.fillStyle='rgba(255,255,255,.35)'; ctx.font='600 22px ui-sans-serif,system-ui,Segoe UI,Inter'; ctx.textAlign='center'; ctx.fillText('Canvas — import an image to begin', w/2, h/2); })();
+(function(){ const w=canvas.width,h=canvas.height; ctx.fillStyle='#0b0d11';ctx.fillRect(0,0,w,h); ctx.fillStyle='rgba(255,255,255,.35)'; ctx.font='600 22px var(--font)'; ctx.textAlign='center'; ctx.fillText('Canvas — import an image to begin', w/2, h/2); })();
 function fitContain(iw,ih,cw,ch){ const s=Math.min(cw/iw, ch/ih); return {dw:Math.round(iw*s), dh:Math.round(ih*s)}; }
 async function loadImage(file){
   try{ const bmp=await createImageBitmap(file); appState.img=bmp; appState.imgW=bmp.width; appState.imgH=bmp.height; render(); }
@@ -254,17 +356,6 @@ const CORE9_COLORS=[
   { name:"black", hex:"#0A0A0A" }
 ].map(c=>({...c, lab: rgbToLab(...hexToRgb(c.hex))}));
 
-/* ⬇️ PASTE YOUR ENTIRE recipesFromCSV OBJECT FROM YOUR WORKING FILE HERE (verbatim)
-   (From your “Tattoo Lab — Prototype V1.html”)  — keeping it identical ensures all mix math still works.
-   Example header:
-
-const recipesFromCSV = {
-  "TL Color — 30 Drops White, 1 Drop Yellow": { "label": "...", "rgb":[244,240,166], "components":[{"ink":"white","drops":30},{"ink":"yellow","drops":1}] },
-  // ... the rest of your list ...
-};
-
-   Source file reference for your working block: (same structure)  [oai_citation:2‡Tattoo Lab — Prototype V1.html](file-service://file-6yDvabmwnVp91YtyntvznV)
-*/
 const recipesFromCSV = {
   "TL-color1": { "label": "30 drops of white + 1 drop of yellow", "rgb": [244, 240, 166], "components": [{ "ink": "white", "drops": 30 }, { "ink": "yellow", "drops": 1 }] },
   "TL-color2": { "label": "Equal parts - Yellow and white", "rgb": [250, 234, 0], "components": [{ "ink": "yellow", "drops": 20 }, { "ink": "white", "drops": 20 }] },
@@ -376,8 +467,6 @@ const recipesFromCSV = {
 
 /* Brand base inks (your file already defines them above the recipes in the working version) */
 const brandBaseInks = {
-  /* Keep your existing brand dictionaries here (unchanged) — if they are already in your file above the recipes, copy them over as-is. */
-  /* Example minimal stub so the app boots even before you paste: */
   "Radiant Colors": { "Black": "#0A0A0A", "White": "#FFFFFF", "Yellow": "#F9E14B", "Red": "#D62828", "Blue": "#2066C5", "Green": "#1F8A4C", "Orange": "#ED7D31", "Magenta": "#E23074", "Violet": "#6B4FB3" }
 };
 
@@ -466,13 +555,21 @@ const builders={
     fi.onchange=(e)=>{ const f=e.target.files?.[0]; if(f) loadImage(f); };
     clr.onclick=()=>{ appState.img=null; render(); };
     applyBtn.onclick=()=>{ alertUser("Crop applied!"); render(); };
+    
+    // Red accent for the clear button
+    clr.style.background = `linear-gradient(145deg, var(--primary-red), #991b1b)`;
+    clr.style.borderColor = '#450a0a';
+    clr.style.borderTopColor = '#fca5a5';
+    clr.addEventListener('mouseenter', () => clr.style.background = `linear-gradient(145deg, #ef4444, var(--primary-red-hover))`);
+    clr.addEventListener('mouseleave', () => clr.style.background = `linear-gradient(145deg, var(--primary-red), #991b1b)`);
+
   }}),
 
   details:()=>makePanel({id:'p-details',title:'Project Details',width:330,content:`
-    <div class='row'><label class='label'>Client Name</label><input type='text' id='clientName'></div>
-    <div class='row'><label class='label'>Tattoo Concept</label><input type='text' id='tattooConcept'></div>
-    <div class='row'><label class='label'>Placement</label><input type='text' id='tattooPlacement'></div>
-    <div class='col'><label class='label'>Notes</label><textarea id='tattooNotes'></textarea></div>
+    <div class='row'><label class='label'>Client Name</label><input type='text' id='clientName' placeholder="e.g. John Doe"></div>
+    <div class='row'><label class='label'>Tattoo Concept</label><input type='text' id='tattooConcept' placeholder="e.g. Neo-traditional Tiger"></div>
+    <div class='row'><label class='label'>Placement</label><input type='text' id='tattooPlacement' placeholder="e.g. Left forearm"></div>
+    <div class='col'><label class='label'>Notes</label><textarea id='tattooNotes' placeholder="Session details, allergies, etc."></textarea></div>
   `, onopen:(p)=>{
     const n=$('#clientName',p), c=$('#tattooConcept',p), pl=$('#tattooPlacement',p), no=$('#tattooNotes',p);
     n.value=appState.projectDetails.clientName||''; c.value=appState.projectDetails.concept||''; pl.value=appState.projectDetails.placement||''; no.value=appState.projectDetails.notes||'';
@@ -493,38 +590,53 @@ const builders={
   }}),
 
   export:()=>makePanel({id:'p-export',title:'Export',content:`
-    <div class='label'>Reference sheet will include: Canvas image, Palette & attached Recipes.</div>
-    <div class='row' style='justify-content:flex-end'><button class='btn' id='btnDoExport'>Export</button></div>
+    <div class='label' style="line-height: 1.5;">The reference sheet will include the current canvas image, project details, and the full recipe list for your palette.</div>
+    <div class='row' style='justify-content:flex-end'><button class='btn primary' id='btnDoExport'>Export as PNG</button></div>
   `, onopen:(p)=>{
     $('#btnDoExport',p).onclick=()=>{
       if(!appState.img){ alertUser("Please import an image before exporting."); return; }
-      const sheet=document.createElement('canvas'); const pad=24, line=20;
-      let y=pad+40, requiredHeight=y;
+      const sheet=document.createElement('canvas'); const pad=30, line=24, head=20;
+      let y=pad+head, requiredHeight=y;
       appState.palette.forEach(pal=>{
         requiredHeight += line; const rec = RECIPES[pal.color];
         if(rec && rec.components) requiredHeight += rec.components.length * line;
-        requiredHeight += 10;
+        requiredHeight += 12;
       });
-      requiredHeight = Math.max(canvas.height + (pad*2), requiredHeight);
-      sheet.width=canvas.width+520; sheet.height=requiredHeight;
+      requiredHeight = Math.max(canvas.height + (pad*2), requiredHeight) + 120; // Extra for details
+      sheet.width=canvas.width+600; sheet.height=requiredHeight;
       const c=sheet.getContext('2d');
-      c.fillStyle='#fff'; c.fillRect(0,0,sheet.width,sheet.height); c.drawImage(canvas, pad, pad);
-      c.fillStyle='#000'; c.font='16px sans-serif'; c.fillText('Tattoo Lab — Reference Sheet', canvas.width+pad*2, pad+16);
-      y=pad+40;
+      c.fillStyle='#111318'; c.fillRect(0,0,sheet.width,sheet.height);
+      c.drawImage(canvas, pad, pad);
+
+      c.fillStyle='#fff'; c.font='bold 20px Inter'; c.fillText('Tattoo Lab — Reference Sheet', canvas.width+pad*2, pad+16);
+      y=pad+80;
+
+      const details=appState.projectDetails;
+      if(details.clientName || details.concept || details.placement){
+        c.font='bold 16px Inter'; c.fillStyle='var(--primary-orange)'; c.fillText('PROJECT DETAILS', canvas.width+pad*2, y); y+=line+4;
+        c.font='14px Inter'; c.fillStyle='#fff';
+        if(details.clientName) { c.fillText(`Client: ${details.clientName}`, canvas.width+pad*2, y); y+=line; }
+        if(details.concept) { c.fillText(`Concept: ${details.concept}`, canvas.width+pad*2, y); y+=line; }
+        if(details.placement) { c.fillText(`Placement: ${details.placement}`, canvas.width+pad*2, y); y+=line; }
+        y+=line;
+      }
+
+      c.font='bold 16px Inter'; c.fillStyle='var(--primary-orange)'; c.fillText('PALETTE & RECIPES', canvas.width+pad*2, y); y+=line+4;
       appState.palette.forEach(pal=>{
         const rec=(RECIPES[pal.color]);
         const colorName = pal.color.length>40 ? pal.color.slice(0,37)+'…' : pal.color;
-        c.fillStyle='#000'; c.fillText(`${pal.brand} — ${colorName}`, canvas.width+pad*2, y); y+=line;
+        c.fillStyle='#fff'; c.font='bold 14px Inter'; c.fillText(`${pal.brand} — ${colorName}`, canvas.width+pad*2, y); y+=line;
         if(rec && rec.components && rec.components.length){
+          c.font='14px Inter';
           rec.components.forEach(comp=>{
             const drops = comp.drops ?? comp.pct ?? '';
             const note = comp.note ? ` (${comp.note})` : '';
-            c.fillStyle='#333'; c.fillText(`• ${comp.ink}: ${drops}${note}`, canvas.width+pad*2+12, y); y+=line;
+            c.fillStyle='#ccc'; c.fillText(`• ${comp.ink}: ${drops}${note}`, canvas.width+pad*2+12, y); y+=line;
           });
         } else {
-          c.fillStyle='#900'; c.fillText('• [Recipe data missing]', canvas.width+pad*2+12, y); y+=line;
+          c.fillStyle='#ef4444'; c.fillText('• [Recipe data missing]', canvas.width+pad*2+12, y); y+=line;
         }
-        y+=10;
+        y+=12;
       });
       const a=document.createElement('a'); a.download='tattoo-reference.png'; a.href=sheet.toDataURL('image/png'); a.click();
       alertUser("Reference sheet exported as PNG.");
@@ -535,10 +647,10 @@ const builders={
     const host=$('#paletteHost',p);
     const renderPal=()=>{
       host.innerHTML='';
-      if(appState.palette.length===0){ host.innerHTML="<div class='label' style='grid-column:1/-1;text-align:center;'>No colors in palette.</div>"; return; }
+      if(appState.palette.length===0){ host.innerHTML="<div class='label' style='grid-column:1/-1;text-align:center;'>No colors in palette. Add some from the Library or use Grid Extract.</div>"; return; }
       appState.palette.forEach(it=>{
         const rec=RECIPES[it.color]; if(rec){ const rgb=`rgb(${rec.rgb.join(',')})`;
-          host.insertAdjacentHTML('beforeend', swatchHtml(it.color, rgb, `data-palette-item='${it.brand}:${it.color}'`, true, false));
+          host.insertAdjacentHTML('beforeend', swatchHtml(it.color, rgb, `data-palette-item='${it.brand}:${it.color}'`, true, true));
         }
       });
     };
@@ -554,7 +666,7 @@ const builders={
   }}),
 
   brand:()=>makePanel({id:'p-brand',title:'Brand',width:330,content:`
-    <div class='row'><label class='label'>Brand</label><select class='select' id='brandSelect'></select></div>
+    <div class='row'><label class='label'>Ink Brand</label><select class='select' id='brandSelect'></select></div>
     <div class='row'><label class='label'>Ink Cap Size</label>
       <select class='select' id='inkCapSize'>
         <option value='20'>Small (~20 drops)</option>
@@ -562,6 +674,7 @@ const builders={
         <option value='60'>Large (~60 drops)</option>
       </select>
     </div>
+    <div class='label'>Core Inks (Click to add to palette)</div>
     <div class='swatches' id='core9Grid'></div>
   `, onopen:(p)=>{
     const sel=$('#brandSelect',p), cap=$('#inkCapSize',p), grid=$('#core9Grid',p);
@@ -595,7 +708,7 @@ const builders={
     if(appState.palette.length===0){ host.innerHTML="<div class='label' style='text-align:center;'>Add colors to your palette to see their recipes here.</div>"; return; }
     appState.palette.forEach(it=>{
       const rec=RECIPES[it.color];
-      const wrap=document.createElement('div'); wrap.className='swatch'; wrap.style.flexDirection='column'; wrap.style.alignItems='flex-start';
+      const wrap=document.createElement('div'); wrap.className='swatch'; wrap.style.flexDirection='column'; wrap.style.alignItems='flex-start'; wrap.style.gap = '8px'; wrap.style.cursor='default';
       const header=document.createElement('div'); header.className='row'; header.style.width='100%'; header.style.justifyContent='space-between';
       const isMaster = !!recipesFromCSV[it.color];
       const brandName = isMaster ? 'TL Color' : it.brand;
@@ -604,7 +717,7 @@ const builders={
       header.innerHTML = `<div style="display:flex; align-items:center; gap:8px;"><div class="dot" style="background:${rgb}"></div><span class='label' style='color:#c9d6ff; font-weight:600;'>${brandName} — ${displayName}</span></div>`;
       wrap.appendChild(header);
 
-      const inner=document.createElement('div'); inner.className='row'; inner.style.width='100%'; inner.style.flexWrap='wrap'; inner.style.gap='5px';
+      const inner=document.createElement('div'); inner.style.width='100%'; inner.style.display='flex'; inner.style.flexDirection='column'; inner.style.gap='5px';
 
       if(rec && rec.components && rec.components.length){
         const total = rec.components.reduce((s,c)=>s+(c.drops||0),0);
@@ -619,9 +732,9 @@ const builders={
             }
             return { ink:name, drops:scaledDrops };
           }).filter(c=>c.drops>0);
-          inner.innerHTML = `<span class='label'>For ${appState.inkCapSize} drop cap:</span>` + scaled.map(c=>`<span class='chip'>${c.ink}: ${c.drops} drops</span>`).join('');
+          inner.innerHTML = `<span class='label' style='font-size:11px; color:var(--muted);'>For ${appState.inkCapSize} drop cap:</span>` + scaled.map(c=>`<span class='chip' style='background:#111318;'>${c.ink}: ${c.drops} drops</span>`).join('');
         } else {
-          inner.innerHTML = `<span class='label'>Original Mix:</span>` + rec.components.map(c=>{
+          inner.innerHTML = `<span class='label' style='font-size:11px; color:var(--muted);'>Original Mix:</span>` + rec.components.map(c=>{
             let name=c.ink;
             if(isMaster){
               const idx = CORE9_COLORS.findIndex(core=>core.name===c.ink.toLowerCase());
@@ -629,7 +742,7 @@ const builders={
             }
             const drops = c.drops ?? '';
             const note = c.note ? ` (${c.note})` : '';
-            return `<span class='chip'>${name}: ${drops}${note}</span>`;
+            return `<span class='chip' style='background:#111318;'>${name}: ${drops}${note}</span>`;
           }).join('');
         }
       } else {
@@ -639,13 +752,11 @@ const builders={
     });
   }}),
 
-  
-
   grid:()=>{ const p=makePanel({id:'p-grid',title:'Grid Extract',content:`
     <div class='row'><label class='label'>Cell Size</label><input type='range' id='gridSize' class='slider' min='8' max='200' value='${appState.gridSize}'><span class='label' id='gridVal'>${appState.gridSize}px</span></div>
     <div class='row'><label class='label'>Sensitivity</label><input type='range' id='gridSensitivity' class='slider' min='1' max='30' value='${appState.gridSensitivity}'><span class='label' id='sensitivityVal'>${appState.gridSensitivity}</span></div>
-    <div class='row' style='justify-content:flex-end'><button class='btn' id='btnExtract'>Extract</button></div>
-    <div class='label'>Higher sensitivity means fewer, more distinct colors are added.</div>`});
+    <div class='row' style='justify-content:flex-end'><button class='btn primary' id='btnExtract'>Extract</button></div>
+    <div class='label' style="font-size:11px; line-height:1.5; opacity: 0.8;">Higher sensitivity means fewer, more distinct colors are added to the palette.</div>`});
     if(!p) return;
     const size=$('#gridSize',p), val=$('#gridVal',p), sens=$('#gridSensitivity',p), sensVal=$('#sensitivityVal',p), btn=$('#btnExtract',p);
     size.oninput=()=>{ appState.gridSize=+size.value; document.documentElement.style.setProperty('--grid-size', appState.gridSize+'px'); val.textContent=appState.gridSize+'px'; saveAppState(); };
@@ -710,16 +821,7 @@ document.documentElement.style.setProperty('--grid-size', appState.gridSize+'px'
 render();
 
 </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then(registration => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, err => {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
-</script>
 </body>
 </html>
+
+
